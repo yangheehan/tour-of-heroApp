@@ -14,6 +14,7 @@ export class HeroDetailComponent implements OnInit {
   ngOnInit() {
     console.log('HeroDetailComponent init');
     // console.log(this.hero);
+
   }
 
 

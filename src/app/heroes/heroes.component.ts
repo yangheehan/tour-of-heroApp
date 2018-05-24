@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import {Hero} from '../hero';
 import {HEROES} from '../mock-heros';
+import {HeroService} from '../hero.service';
 
 @Component({
   selector: 'app-heroes',
@@ -9,12 +10,12 @@ import {HEROES} from '../mock-heros';
 })
 export class HeroesComponent implements OnInit, OnDestroy {
 
-  hero: Hero = {id: 1, name: 'Winstorm'};
-  heros: Hero[] = HEROES;
+  heros: Hero[];
   selectHero: Hero;
 
-  constructor() {
-    console.log('constructor 메소드 호출');
+  constructor(private heroService: HeroService) {
+    console.log(this.heroService);
+    this.getHeroes();
   }
 
 
@@ -28,5 +29,9 @@ export class HeroesComponent implements OnInit, OnDestroy {
 
   onSelect(hero: Hero): void {
     this.selectHero = hero;
+  }
+
+  getHeroes(): void {
+    this.heroService.getHeros().subscribe(res => this.heros = res);
   }
 }
